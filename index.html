@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click+X — Mais clientes. Todo mês.</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --laranja: #FF6B00;
+  --preto: #0A0A0A;
+  --grafite: #111111;
+  --grafite2: #161616;
+  --branco: #FFFFFF;
+  --cinza: #444441;
+  --cinza-claro: #888780;
+  --borda: #1E1E1E;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 40px; height: 64px;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+}
+.nav-logo { display: flex; align-items: center; gap: 0; }
+.nav-word { font-size: 22px; font-weight: 900; color: var(--branco); letter-spacing: -0.5px; line-height: 1; }
+.nav-icon {
+  background: var(--laranja); border-radius: 7px;
+  padding: 4px 10px; font-size: 17px; font-weight: 900;
+  color: var(--branco); line-height: 1.35; margin-left: 6px;
+}
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-size: 13px; font-weight: 500; color: var(--cinza-claro); text-decoration: none; transition: color .2s; letter-spacing: .02em; }
+.nav-link:hover { color: var(--branco); }
+.nav-cta {
+  background: var(--laranja); color: var(--branco); border: none;
+  border-radius: 7px; padding: 10px 20px; font-size: 13px;
+  font-weight: 700; cursor: pointer; font-family: 'Exo 2', sans-serif;
+  transition: opacity .2s; letter-spacing: .02em;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; overflow: hidden;
+  padding: 100px 40px 80px; text-align: center;
+  border-bottom: 1px solid var(--borda);
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,107,0,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,107,0,0.1); color: var(--laranja);
+  font-size: 11px; font-weight: 700; padding: 6px 16px;
+  border-radius: 20px; margin-bottom: 28px;
+  letter-spacing: .08em; text-transform: uppercase;
+  border: 1px solid rgba(255,107,0,0.25);
+}
+.hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 900; line-height: 1.0;
+  color: var(--branco); margin-bottom: 6px;
+  letter-spacing: -2px;
+}
+.hero h1 em { color: var(--laranja); font-style: normal; }
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px); color: var(--cinza-claro);
+  line-height: 1.7; max-width: 500px;
+  margin: 0 auto 36px; font-weight: 400;
+}
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+.btn-primary {
+  background: var(--laranja); color: var(--branco); border: none;
+  border-radius: 9px; padding: 16px 32px; font-size: 15px;
+  font-weight: 700; cursor: pointer; font-family: 'Exo 2', sans-serif;
+  transition: all .2s; letter-spacing: .02em;
+}
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; color: var(--branco);
+  border: 1px solid var(--borda); border-radius: 9px;
+  padding: 16px 32px; font-size: 15px; cursor: pointer;
+  font-family: 'Exo 2', sans-serif; font-weight: 500;
+  transition: all .2s; letter-spacing: .02em;
+}
+.btn-secondary:hover { border-color: var(--cinza); }
+
+.hero-proof {
+  display: flex; justify-content: center; gap: 0;
+  border-top: 1px solid var(--borda); padding-top: 48px;
+  flex-wrap: wrap;
+}
+.proof-item {
+  text-align: center; padding: 0 40px;
+  border-right: 1px solid var(--borda);
+}
+.proof-item:last-child { border-right: none; }
+.proof-num { font-size: 36px; font-weight: 900; color: var(--laranja); letter-spacing: -1px; line-height: 1; }
+.proof-label { font-size: 12px; color: var(--cinza-claro); margin-top: 6px; font-weight: 400; line-height: 1.4; }
+
+/* ─── SEÇÕES ─── */
+section { padding: 80px 40px; }
+.container { max-width: 960px; margin: 0 auto; }
+.sec-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--laranja);
+  text-align: center; margin-bottom: 10px;
+}
+.sec-h2 {
+  font-size: clamp(24px, 3.5vw, 36px); font-weight: 800;
+  color: var(--branco); text-align: center;
+  margin-bottom: 48px; line-height: 1.2; letter-spacing: -.5px;
+}
+
+/* ─── DOR ─── */
+.dor { background: var(--grafite2); border-bottom: 1px solid var(--borda); }
+.dor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.dor-item {
+  background: var(--grafite); border: 1px solid var(--borda);
+  border-left: 3px solid var(--laranja);
+  border-radius: 10px; padding: 1.1rem 1.1rem 1.1rem 1.25rem;
+}
+.dor-text { font-size: 14px; color: #666; line-height: 1.6; font-style: italic; }
+
+/* ─── PROCESSO ─── */
+.como { background: var(--preto); border-bottom: 1px solid var(--borda); }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; }
+.step { text-align: center; position: relative; }
+.step-n {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--laranja); color: var(--branco);
+  font-size: 22px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px; font-family: 'Exo 2', sans-serif;
+}
+.step h3 { font-size: 15px; font-weight: 700; color: var(--branco); margin-bottom: 8px; }
+.step p { font-size: 13px; color: var(--cinza-claro); line-height: 1.65; }
+
+/* ─── PLANOS ─── */
+.servicos { background: var(--grafite2); border-bottom: 1px solid var(--borda); }
+.transp-banner {
+  background: rgba(255,107,0,0.06);
+  border: 1px solid rgba(255,107,0,0.2);
+  border-left: 4px solid var(--laranja);
+  border-radius: 12px; padding: 1.1rem 1.4rem;
+  margin-bottom: 36px;
+}
+.transp-title { font-size: 15px; font-weight: 700; color: var(--laranja); margin-bottom: 6px; }
+.transp-sub { font-size: 13px; color: var(--cinza-claro); line-height: 1.65; }
+.serv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.serv-card {
+  background: var(--grafite); border: 1px solid var(--borda);
+  border-radius: 14px; padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0;
+  transition: border-color .2s;
+}
+.serv-card:hover { border-color: #333; }
+.serv-card.featured {
+  border: 2px solid var(--laranja);
+  background: #0d0800;
+}
+.serv-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 6px; margin-bottom: 14px;
+  align-self: flex-start; letter-spacing: .06em; text-transform: uppercase;
+}
+.serv-card h3 { font-size: 18px; font-weight: 800; color: var(--branco); margin-bottom: 8px; letter-spacing: -.3px; }
+.serv-card > p { font-size: 13px; color: var(--cinza-claro); line-height: 1.65; margin-bottom: 20px; }
+.price-block { border-top: 1px solid var(--borda); padding-top: 16px; margin-top: auto; }
+.price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.price-lbl { font-size: 12px; color: var(--cinza-claro); }
+.price-val { font-size: 22px; font-weight: 900; color: var(--branco); letter-spacing: -.5px; }
+.price-val span { font-size: 13px; font-weight: 400; color: var(--cinza); }
+.price-verba { font-size: 13px; color: var(--cinza); }
+.verba-note { font-size: 11px; color: var(--laranja); margin-top: 8px; font-weight: 500; }
+
+.garantia {
+  background: var(--grafite); border: 1px solid var(--borda);
+  border-radius: 12px; padding: 1.1rem 1.25rem;
+  margin-top: 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.g-dot { width: 8px; height: 8px; border-radius: 2px; background: var(--laranja); flex-shrink: 0; margin-top: 5px; }
+.g-text h4 { font-size: 13px; font-weight: 700; color: var(--branco); margin-bottom: 4px; }
+.g-text p { font-size: 12px; color: var(--cinza-claro); line-height: 1.65; }
+
+/* ─── PARA QUEM ─── */
+.paraquem {
+  background: var(--laranja); padding: 64px 40px;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.paraquem .sec-label { color: rgba(255,255,255,.7); }
+.paraquem .sec-h2 { color: var(--branco); margin-bottom: 16px; }
+.paraquem p { font-size: 17px; color: rgba(255,255,255,.85); text-align: center; max-width: 560px; margin: 0 auto; line-height: 1.75; font-weight: 400; }
+
+/* ─── CASE ─── */
+.case { background: var(--preto); border-bottom: 1px solid var(--borda); }
+.case-card {
+  background: var(--grafite); border: 1px solid var(--borda);
+  border-radius: 16px; padding: 2rem; max-width: 700px; margin: 0 auto;
+}
+.case-tag { font-size: 11px; font-weight: 700; color: var(--laranja); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .08em; }
+.case-name { font-size: 18px; font-weight: 700; color: var(--branco); margin-bottom: 24px; }
+.case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.case-m { background: var(--preto); border-radius: 10px; padding: 14px; text-align: center; border: 1px solid var(--borda); }
+.case-m .val { font-size: 28px; font-weight: 900; color: var(--laranja); letter-spacing: -1px; line-height: 1; }
+.case-m .lbl { font-size: 11px; color: var(--cinza-claro); margin-top: 5px; line-height: 1.4; }
+.case-quote {
+  font-size: 14px; color: var(--cinza-claro); font-style: italic;
+  line-height: 1.75; border-top: 1px solid var(--borda); padding-top: 18px;
+}
+
+/* ─── DEPOIMENTOS ─── */
+.depo { background: var(--grafite2); border-bottom: 1px solid var(--borda); }
+.depo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.depo-card { background: var(--grafite); border: 1px solid var(--borda); border-radius: 14px; padding: 1.4rem; }
+.depo-stars { color: var(--laranja); font-size: 14px; margin-bottom: 12px; letter-spacing: 3px; }
+.depo-text { font-size: 13px; color: var(--cinza-claro); line-height: 1.75; margin-bottom: 18px; font-style: italic; }
+.depo-author { display: flex; align-items: center; gap: 10px; }
+.depo-avatar {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--laranja); display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 700;
+  color: var(--branco); flex-shrink: 0;
+}
+.depo-name { font-size: 13px; font-weight: 700; color: var(--branco); }
+.depo-biz { font-size: 11px; color: var(--cinza-claro); }
+
+/* ─── CTA FINAL ─── */
+.cta-sec {
+  background: var(--preto); padding: 100px 40px;
+  text-align: center; position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--borda);
+}
+.cta-sec::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; top: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(255,107,0,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-sec h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: var(--branco); margin-bottom: 14px; line-height: 1.1; letter-spacing: -1px; }
+.cta-sec h2 em { color: var(--laranja); font-style: normal; }
+.cta-sec > .container > p { font-size: 16px; color: var(--cinza-claro); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto 16px; }
+.cta-form input {
+  flex: 1; min-width: 200px; padding: 16px 18px;
+  border-radius: 10px; border: 1px solid var(--borda);
+  font-size: 14px; color: var(--branco);
+  background: var(--grafite); font-family: 'Exo 2', sans-serif;
+  font-weight: 500; outline: none; transition: border-color .2s;
+}
+.cta-form input:focus { border-color: var(--laranja); }
+.cta-form input::placeholder { color: var(--cinza); }
+.cta-form button {
+  background: var(--laranja); color: var(--branco); border: none;
+  border-radius: 10px; padding: 16px 28px; font-size: 14px;
+  font-weight: 700; cursor: pointer; white-space: nowrap;
+  font-family: 'Exo 2', sans-serif; transition: all .2s;
+}
+.cta-form button:hover { opacity: .88; transform: translateY(-1px); }
+.cta-note { font-size: 12px; color: var(--cinza); margin-top: 0; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--preto); padding: 24px 40px;
+  border-top: 1px solid var(--borda);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 10px;
+}
+.footer-logo { display: flex; align-items: center; }
+.footer-word { font-size: 16px; font-weight: 900; color: var(--branco); }
+.footer-icon { background: var(--laranja); border-radius: 5px; padding: 2px 8px; font-size: 13px; font-weight: 900; color: var(--branco); margin-left: 5px; }
+.footer-info { font-size: 12px; color: var(--cinza); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero, section, .paraquem, .cta-sec { padding-left: 20px; padding-right: 20px; }
+  .hero { padding-top: 64px; padding-bottom: 56px; }
+  .proof-item { padding: 0 20px; }
+  .case-metrics { grid-template-columns: repeat(2, 1fr); }
+  footer { padding: 20px; flex-direction: column; text-align: center; }
+}
+
+/* ─── ANIMAÇÃO DE ENTRADA ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-badge, .hero h1, .hero-sub, .hero-btns, .hero-proof {
+  animation: fadeUp .7s ease both;
+}
+.hero h1 { animation-delay: .1s; }
+.hero-sub { animation-delay: .2s; }
+.hero-btns { animation-delay: .3s; }
+.hero-proof { animation-delay: .4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-word">Click</span>
+    <span class="nav-icon">+X</span>
+  </div>
+  <div class="nav-links">
+    <a href="#como" class="nav-link">Como funciona</a>
+    <a href="#planos" class="nav-link">Planos</a>
+    <a href="#case" class="nav-link">Cases</a>
+    <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Diagnóstico grátis</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Especialistas em leads e conversão — Uberaba, MG</div>
+    <h1>Mais clientes.<br><em>Todo mês.</em></h1>
+    <p class="hero-sub">Você já sabe que precisa estar no digital. A Click+X te mostra como — e fica do seu lado até o resultado aparecer de verdade.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Quero meu diagnóstico grátis</button>
+      <button class="btn-secondary" onclick="document.getElementById('como').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-num">11,6%</div>
+        <div class="proof-label">taxa de clique<br>mercado: 2 a 5%</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">R$2,11</div>
+        <div class="proof-label">custo por clique<br>médio</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">22 dias</div>
+        <div class="proof-label">para os primeiros<br>resultados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="dor">
+  <div class="container">
+    <p class="sec-label">Você se identifica?</p>
+    <h2 class="sec-h2">O que todo dono de negócio sente<br>antes de fechar com a gente</h2>
+    <div class="dor-grid">
+      <div class="dor-item"><p class="dor-text">"Posto nas redes mas não vejo cliente novo chegar."</p></div>
+      <div class="dor-item"><p class="dor-text">"Já impulsionei post e não voltou nem o investimento."</p></div>
+      <div class="dor-item"><p class="dor-text">"Sei que preciso do digital mas não sei por onde começar."</p></div>
+      <div class="dor-item"><p class="dor-text">"Meus concorrentes aparecem no Google e eu não."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="como" id="como">
+  <div class="container">
+    <p class="sec-label">Nosso processo</p>
+    <h2 class="sec-h2">Do clique até a venda</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h3>Diagnóstico grátis</h3>
+        <p>Analisamos seu negócio e mostramos onde estão as oportunidades reais. Você vê o que está perdendo antes de gastar qualquer coisa.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h3>Estratégia personalizada</h3>
+        <p>Plano feito para o seu nicho, seu orçamento e seu público em Uberaba. Nada genérico.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h3>Campanhas no ar</h3>
+        <p>Google Ads configurado para atrair quem já está procurando pelo que você vende agora — não amanhã, agora.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <h3>Do clique à venda</h3>
+        <p>Não paramos no lead. Acompanhamos se está convertendo em venda. Se não estiver, investigamos o porquê junto com você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="servicos" id="planos">
+  <div class="container">
+    <p class="sec-label">Planos</p>
+    <h2 class="sec-h2">Escolha o plano certo para o seu momento</h2>
+    <div class="transp-banner">
+      <div class="transp-title">Você controla a verba. Nós controlamos o resultado.</div>
+      <div class="transp-sub">A verba de anúncios é paga diretamente ao Google — nunca passa por nós. Você tem acesso total à conta e vê cada centavo investido em tempo real.</div>
+    </div>
+    <div class="serv-grid">
+      <div class="serv-card">
+        <div class="serv-tag" style="background:rgba(255,107,0,0.1);color:var(--laranja);border:1px solid rgba(255,107,0,0.2)">Starter</div>
+        <h3>Para começar</h3>
+        <p>Uma campanha Google Ads de busca + configuração e otimização do Google Meu Negócio. Relatório mensal e alinhamento quinzenal por WhatsApp.</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-lbl">Gestão Click+X</span><span class="price-val">R$800<span>/mês</span></span></div>
+          <div class="price-row"><span class="price-lbl">Verba recomendada</span><span class="price-verba">R$500–800/mês</span></div>
+          <p class="verba-note">Total estimado: R$1.300–1.600/mês</p>
+        </div>
+      </div>
+      <div class="serv-card featured">
+        <div class="serv-tag" style="background:var(--laranja);color:#fff">Mais escolhido</div>
+        <h3>Performance</h3>
+        <p>Duas campanhas simultâneas no Google Ads + landing page de captura com remarketing + estratégia de avaliações + painel Looker Studio em tempo real.</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-lbl">Gestão Click+X</span><span class="price-val">R$1.500<span>/mês</span></span></div>
+          <div class="price-row"><span class="price-lbl">Verba recomendada</span><span class="price-verba">R$1.000–2.000/mês</span></div>
+          <p class="verba-note">Total estimado: R$2.500–3.500/mês</p>
+        </div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-tag" style="background:rgba(255,107,0,0.1);color:var(--laranja);border:1px solid rgba(255,107,0,0.2)">Premium</div>
+        <h3>Para escalar</h3>
+        <p>Tudo do Performance + campanha no Meta Ads. Para quem já tem o Google funcionando e quer crescer mais rápido com presença digital completa.</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-lbl">Gestão Click+X</span><span class="price-val">R$2.500<span>/mês</span></span></div>
+          <div class="price-row"><span class="price-lbl">Verba recomendada</span><span class="price-verba">R$3.000+/mês</span></div>
+          <p class="verba-note">Total estimado: a partir de R$5.500/mês</p>
+        </div>
+      </div>
+    </div>
+    <div class="garantia">
+      <div class="g-dot"></div>
+      <div class="g-text">
+        <h4>Primeiro mês sem contrato de fidelidade</h4>
+        <p>Se em 30 dias você não ver resultado, pode sair sem multa e sem burocracia. Acreditamos no que entregamos — e você não deveria pagar por algo que não funciona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="paraquem">
+  <div class="container">
+    <p class="sec-label">Para quem é a Click+X</p>
+    <h2 class="sec-h2">A Click+X não é para todo mundo.</h2>
+    <p>Trabalhamos com negócios que querem crescer e têm estrutura para atender mais clientes. Se você já sabe que precisa do digital mas nunca encontrou um parceiro que realmente ficasse do seu lado até o resultado aparecer — é aqui.</p>
+  </div>
+</section>
+
+<!-- CASE -->
+<section class="case" id="case">
+  <div class="container">
+    <p class="sec-label">Case real</p>
+    <h2 class="sec-h2">Resultado de um cliente em Uberaba</h2>
+    <div class="case-card">
+      <div class="case-tag">Google Ads · 22 dias · Em andamento</div>
+      <div class="case-name">Via Brindes — Brindes corporativos, Uberaba-MG</div>
+      <div class="case-metrics">
+        <div class="case-m"><div class="val">81</div><div class="lbl">cliques em 22 dias</div></div>
+        <div class="case-m"><div class="val">11,6%</div><div class="lbl">taxa de clique</div></div>
+        <div class="case-m"><div class="val">R$2,11</div><div class="lbl">custo por clique</div></div>
+        <div class="case-m"><div class="val">R$171</div><div class="lbl">investidos</div></div>
+      </div>
+      <div class="case-quote">"Antes eu dependia só de indicações. Hoje chega pedido de orçamento todo dia pelo WhatsApp."</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depo">
+  <div class="container">
+    <p class="sec-label">Depoimentos</p>
+    <h2 class="sec-h2">O que dizem nossos clientes</h2>
+    <div class="depo-grid">
+      <div class="depo-card">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">"Em 3 semanas já recebia ligações de pacientes novos. Nunca tinha conseguido isso com outros serviços."</p>
+        <div class="depo-author">
+          <div class="depo-avatar">DR</div>
+          <div><div class="depo-name">Dra. Renata S.</div><div class="depo-biz">Clínica odontológica, Uberaba</div></div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">"Eles falam a língua do negócio — não me enchem de relatório bonito sem resultado real."</p>
+        <div class="depo-author">
+          <div class="depo-avatar">MC</div>
+          <div><div class="depo-name">Marcos C.</div><div class="depo-biz">Distribuidora local, Uberaba</div></div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">"Triplicamos os orçamentos enviados em dois meses. Vale cada centavo do investimento."</p>
+        <div class="depo-author">
+          <div class="depo-avatar">JS</div>
+          <div><div class="depo-name">Juliana S.</div><div class="depo-biz">Estética avançada, Uberaba</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec" id="cta">
+  <div class="container">
+    <h2>Pronto para ter<br><em>mais clientes todo mês?</em></h2>
+    <p>Você já sabe que precisa estar no digital. O próximo passo é simples — um diagnóstico gratuito de 15 minutos onde você vê exatamente o que está perdendo agora. Sem compromisso, sem pressão.</p>
+    <div class="cta-form">
+      <input type="text" placeholder="Seu WhatsApp com DDD" />
+      <button>Quero o diagnóstico grátis</button>
+    </div>
+    <p class="cta-note">Sem spam. Retorno em até 24h.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <span class="footer-word">Click</span>
+    <span class="footer-icon">+X</span>
+  </div>
+  <div class="footer-info">Uberaba, MG &nbsp;·&nbsp; (34) 9xxxx-xxxx</div>
+  <div class="footer-info">© 2026 Click+X — Todos os direitos reservados</div>
+</footer>
+
+</body>
+</html>
